@@ -8,5 +8,6 @@ Automatic-Module-Name: org.palladiosimulator.analyzer.slingshot.behavior.general
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Require-Bundle: de.uka.ipd.sdq.probfunction.math,
  de.uka.ipd.sdq.simucomframework.variables,
+ de.uka.ipd.sdq.simucomframework.core,
  org.apache.log4j;bundle-version="1.2.15",
  org.palladiosimulator.analyzer.slingshot.core

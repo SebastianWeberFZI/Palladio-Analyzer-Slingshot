@@ -7,6 +7,7 @@ import org.palladiosimulator.analyzer.slingshot.core.extension.SimulationBehavio
 
 import de.uka.ipd.sdq.probfunction.math.IProbabilityFunctionFactory;
 import de.uka.ipd.sdq.probfunction.math.impl.ProbabilityFunctionFactoryImpl;
+import de.uka.ipd.sdq.simucomframework.core.SimuComConfig;
 import de.uka.ipd.sdq.simucomframework.variables.cache.StoExCache;
 
 /**
@@ -22,15 +23,24 @@ public class GeneralSimulationConfigurationBehavior implements SimulationBehavio
 	private final static Logger LOGGER = Logger.getLogger(GeneralSimulationConfigurationBehavior.class);
 	
 	@Inject
-	public GeneralSimulationConfigurationBehavior() {
-		this.initializeStoExCache();
+	public GeneralSimulationConfigurationBehavior(final SimuComConfig config) {
+		this.initializeStoExCache(config);
 	}
 	
 	/**
 	 * Initializes the ProbFunction and StoExCache.
+	 * 
+	 * <p>
+	 * The probability function factory gets the random generator of the
+	 * simulation configuration, as in SimuCom. Only this generator honors the
+	 * "fixed seed" setting of the launch configuration; without it, two runs
+	 * with the same seed draw different numbers. It has to be set before the
+	 * first stochastic expression is evaluated, which is why this happens here,
+	 * in the first behavior to be created.
 	 */
-	private void initializeStoExCache() {
+	private void initializeStoExCache(final SimuComConfig config) {
 		final IProbabilityFunctionFactory probabilityFunctionFactory = ProbabilityFunctionFactoryImpl.getInstance();
+		probabilityFunctionFactory.setRandomGenerator(config.getRandomGenerator());
 		StoExCache.initialiseStoExCache(probabilityFunctionFactory);
 		LOGGER.info("Initialized probability function");
 	}

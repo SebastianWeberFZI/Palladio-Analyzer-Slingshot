@@ -15,6 +15,7 @@ import org.palladiosimulator.pcm.usagemodel.BranchTransition;
 import com.google.common.base.Preconditions;
 
 import de.uka.ipd.sdq.simucomframework.variables.StackContext;
+import de.uka.ipd.sdq.simucomframework.variables.cache.StoExCache;
 import de.uka.ipd.sdq.simucomframework.variables.stackframe.SimulatedStackframe;
 
 /**
@@ -159,7 +160,9 @@ public class TransitionDeterminer {
 		}
 
 		final double lastSum = summedProbabilityList.get(summedProbabilityList.size() - 1);
-		final double randomNumber = Math.random(); // TODO: Use SimuCom Random instead
+		// The random generator of the stochastic expressions honors "fixed seed";
+		// Math.random() made every branch choice irreproducible.
+		final double randomNumber = StoExCache.singleton().getRandomGenerator().random();
 
 		int i = 0;
 		for (final Double sum : summedProbabilityList) {

@@ -8,6 +8,7 @@ Automatic-Module-Name: org.palladiosimulator.analyzer.slingshot.common.utils
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Require-Bundle: org.apache.log4j,
  de.uka.ipd.sdq.simucomframework.variables,
+ de.uka.ipd.sdq.probfunction.math,
  org.palladiosimulator.pcm,
  org.palladiosimulator.analyzer.slingshot.core,
  com.google.guava;bundle-version="30.1.0",
