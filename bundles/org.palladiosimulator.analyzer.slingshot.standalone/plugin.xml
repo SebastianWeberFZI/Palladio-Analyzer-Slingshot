@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <!-- Simple recorder for standalone runs: one CSV file per measuring point and metric. -->
+   <extension
+         id="org.palladiosimulator.analyzer.slingshot.standalone.csv"
+         point="org.palladiosimulator.recorderframework.core">
+      <recorder
+            configurationFactory="org.palladiosimulator.analyzer.slingshot.standalone.CsvRecorderConfigurationFactory"
+            recorderImplementation="org.palladiosimulator.analyzer.slingshot.standalone.CsvRecorder"
+            name="Slingshot Standalone CSV">
+      </recorder>
+   </extension>
+</plugin>

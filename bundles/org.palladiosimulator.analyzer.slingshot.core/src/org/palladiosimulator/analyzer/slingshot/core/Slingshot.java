@@ -66,6 +66,52 @@ public class Slingshot extends Plugin {
 		return bundle;
 	}
 
+	/**
+	 * Starts Slingshot without an OSGi framework (standalone mode).
+	 *
+	 * <p>
+	 * In OSGi, the framework calls {@link #start(BundleContext)}. Outside of
+	 * OSGi, nobody does, so {@link #getInstance()} stays {@code null}. This
+	 * method performs the same initialization. The Slingshot extensions are
+	 * still collected through the extension registry
+	 * ({@code Platform.getExtensionRegistry()}), so the caller has to install a
+	 * registry first, e.g. one that reads the {@code plugin.xml} files found on
+	 * the class path (see bundle
+	 * {@code org.palladiosimulator.analyzer.slingshot.standalone}).
+	 *
+	 * @return the started instance
+	 * @throws IllegalStateException if Slingshot is already running
+	 */
+	public static synchronized Slingshot startStandalone() {
+		if (bundle != null) {
+			throw new IllegalStateException("Slingshot is already running");
+		}
+		final Slingshot slingshot = new Slingshot();
+		bundle = slingshot;
+		try {
+			slingshot.injectionHolder = new InjectorHolder();
+		} catch (final RuntimeException e) {
+			bundle = null;
+			throw e;
+		}
+		LOGGER.debug("Slingshot started (standalone)");
+		return slingshot;
+	}
+
+	/**
+	 * Counterpart of {@link #startStandalone()}: forgets the instance, its
+	 * extensions and its injector. A later {@link #startStandalone()} starts
+	 * from scratch.
+	 */
+	public static synchronized void stopStandalone() {
+		if (bundle != null) {
+			bundle.extensions = null;
+			bundle.injectionHolder = null;
+			bundle = null;
+			LOGGER.debug("Slingshot ended (standalone)");
+		}
+	}
+
 	public SystemDriver getSystemDriver() {
 		return injectionHolder.getInstance(SystemDriver.class); // TODO
 	}

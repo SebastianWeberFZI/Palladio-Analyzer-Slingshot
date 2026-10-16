@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Slingshot Standalone
+Bundle-SymbolicName: org.palladiosimulator.analyzer.slingshot.standalone;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Automatic-Module-Name: org.palladiosimulator.analyzer.slingshot.standalone
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Require-Bundle: org.palladiosimulator.analyzer.slingshot.core,
+ org.palladiosimulator.analyzer.slingshot.workflow,
+ org.palladiosimulator.analyzer.workflow,
+ de.uka.ipd.sdq.workflow,
+ de.uka.ipd.sdq.workflow.mdsd,
+ de.uka.ipd.sdq.simucomframework,
+ org.palladiosimulator.recorderframework,
+ org.palladiosimulator.measurementframework,
+ org.palladiosimulator.metricspec,
+ org.palladiosimulator.edp2,
+ org.eclipse.equinox.registry,
+ org.eclipse.equinox.common,
+ org.eclipse.core.runtime,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.xmi,
+ org.apache.log4j
+Export-Package: org.palladiosimulator.analyzer.slingshot.standalone

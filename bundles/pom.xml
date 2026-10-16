@@ -18,6 +18,7 @@
   	<module>org.palladiosimulator.analyzer.slingshot.eventdriver.annotationprocessor</module>
   	<module>org.palladiosimulator.analyzer.slingshot.ui.events</module>
   	<module>org.palladiosimulator.analyzer.slingshot.workflow.events</module>
+  	<module>org.palladiosimulator.analyzer.slingshot.standalone</module>
 
     <!-- PCM-Core modules -->
     <module>org.palladiosimulator.analyzer.slingshot.behavior.generalsimulationconfiguration</module>
